@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% verbatim %}
+        <div class="row" ng-app="restTwitter">
+            <div class="col-md-6 col-md-offset-3" ng-controller="twitterCtrl">
+                <h3>SocialBase</h3>
+                <h6 class="text-default">Adicione @seu_nome para se indentificar nos comentários ex: <strong>@erison</strong> minha mensagem</h6>
+                <form  ng-submit="submit()">
+                        <textarea name="text" ng-model="text" ng-required="true" class="form-control"></textarea>
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-link btn-block"> Comentar </button>
+                    </div>
+                </form>
+
+                <!-- listar postagens -->
+                <div class="col-md-12">
+                    <div ng-repeat="(key, value) in list" class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-xs-6">
+                                <span class="label label-primary">{{value.name}}</span>
+                            </div>
+                            <div class="col-xs-6 pull-right">
+                                <span class="text-primary">{{value.date | date : 'd/MM/yyyy HH:mm:ss'}}</span>
+                            </div>
+                            <div class="col-md-12" style="margin-top:10px;">{{value.text}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endverbatim %}
+
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        {% javascripts '@restTwitterBundle/Resources/views/twitter/js/app-angular/*' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}

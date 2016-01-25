@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets
+            'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
+            'assets/vendor/angular-loading-bar/build/loading-bar.min.css'
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {% javascripts
+            'assets/vendor/jquery/dist/jquery.min.js'
+            'assets/vendor/angular/angular.min.js'
+            'assets/vendor/angular-loading-bar/build/loading-bar.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+
+    </body>
+</html>

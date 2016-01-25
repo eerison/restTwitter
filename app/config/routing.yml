@@ -1,0 +1,4 @@
+rest_twitter:
+    resource: "@restTwitterBundle/Controller/"
+    type:     annotation
+    prefix:   /
