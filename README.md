@@ -21,9 +21,14 @@ projeto para avaliação SocialBase
     composer update
 ```
 
+**criar banco de dados**
+```
+    php app/console doctrine:database:create
+```
+
 **criar tabela**
 ```
-    php app/console doctrine:schema:create
+    php app/console doctrine:schema:update --force
 ```
 
 **iniciar servidor de desenvolvimento**
