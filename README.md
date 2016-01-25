@@ -31,6 +31,11 @@ projeto para avaliação SocialBase
     php app/console server:run
 ```
 
+**acessar pagina**
+```
+    http://127.0.0.1:8000/twitter.html
+```
+
 
 
 
