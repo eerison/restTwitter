@@ -24,7 +24,7 @@ class TwitterController extends Controller
     public function indexAction($_format)
     {
         $em = $this->getDoctrine()->getManager();
-        $twitters = $em->getRepository('restTwitterBundle:Twitter')->findPost(10);
+        $twitters = $em->getRepository('restTwitterBundle:Twitter')->findPost(50);
 
         if($_format == 'html')
             return $this->render('restTwitterBundle:twitter:index.html.twig', array(

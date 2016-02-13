@@ -1,12 +1,14 @@
-var restTwitterApp = angular.module('restTwitter', ['angular-loading-bar'])
-    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+var restTwitterApp = angular.module('restTwitter', ['angular-loading-bar']);
+
+restTwitterApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 }]);
 
-restTwitterApp.controller('twitterCtrl', ['$scope', '$http', function($scope, $http){
+restTwitterApp.controller('twitterCtrl', ['$scope', '$http','$timeout', function($scope, $http, $timeout){
     $scope.list = [];
     $scope.nome;
-    buscar($scope, $http);
+    $scope.enviada = false;
+    buscar($scope, $http, true);
 
     $scope.submit = function() {
         $http({
@@ -20,12 +22,15 @@ restTwitterApp.controller('twitterCtrl', ['$scope', '$http', function($scope, $h
             }
         }).then(function(response) {
                 if(response.status == 200){
-                    buscar($scope, $http);
+                    $scope.text     = null;
+                    $scope.enviada  = true;
+                    buscar($scope, $http,false);
+                    $timeout(function () {$scope.enviada = false; }, 2000);
                 }
             });
     }
 
-    function buscar($scope, $http) {
+    function buscar($scope, $http, autoload) {
         $http({
             mothod : 'get',
             url : 'twitter.json',
@@ -33,8 +38,10 @@ restTwitterApp.controller('twitterCtrl', ['$scope', '$http', function($scope, $h
             console.log('ok');
             $scope.list = angular.copy(response.data);
         });
-    }
 
+        if(autoload)
+            $timeout(function(){buscar($scope,$http, true)}, 3000);
+    }
 
 
 }]);
